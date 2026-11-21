@@ -33,9 +33,8 @@ public final class Hud {
         t.at = System.currentTimeMillis();
         toasts.add(t);
         if (toasts.size() > 5) toasts.remove(0);
-        if (sound) {
-            MinecraftClient.getInstance().getSoundManager()
-                    .play(PositionedSoundInstance.master(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.3f));
+        if (sound && MinecraftClient.getInstance().player != null) {
+            MinecraftClient.getInstance().player.playSound(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.3f);
         }
     }
 
