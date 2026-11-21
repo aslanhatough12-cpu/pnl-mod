@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "pnl",
+  "version": "1.0.0",
+  "name": "PnL Tracker",
+  "description": "Gamble profit/loss tracker with clickable W/L chat buttons, auctions and a K-key menu.",
+  "authors": ["you"],
+  "license": "All-Rights-Reserved",
+  "environment": "client",
+  "entrypoints": {
+    "client": ["com.pnl.PnlMod"]
+  },
+  "depends": {
+    "fabricloader": ">=0.18.0",
+    "minecraft": "~1.21.11",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}
