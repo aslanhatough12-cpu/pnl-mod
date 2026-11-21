@@ -36,7 +36,12 @@ public class PnlMod implements ClientModInitializer {
 
         ClientTickEvents.END_CLIENT_TICK.register(mc -> {
             while (openKey.wasPressed()) {
-                if (mc.currentScreen == null && mc.player != null) mc.setScreen(new PnlScreen());
+                if (mc.player != null) {
+                    mc.player.playSound(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP.value(), 1.0f, 1.3f);
+                }
+                if (mc.currentScreen == null && mc.player != null) {
+                    mc.setScreen(new PnlScreen());
+                }
             }
             Auction.tick(mc);
         });
@@ -105,7 +110,7 @@ public class PnlMod implements ClientModInitializer {
             mc.send(() -> mc.setScreen(new ConfirmPayScreen(p, null)));
         } else {
             st.resolveLoss(p);
-            mc.getSoundManager().play(PositionedSoundInstance.master(SoundEvents.UI_BUTTON_CLICK, 1.4f));
+            if (mc.player != null) mc.player.playSound(SoundEvents.UI_BUTTON_CLICK.value(), 1.0f, 1.4f);
             Hud.toast("L  " + p.player + " lost " + Money.pretty(p.amount), 0xEF4444, false);
         }
     }
