@@ -35,7 +35,7 @@ public final class Hud {
         if (toasts.size() > 5) toasts.remove(0);
         if (sound) {
             MinecraftClient.getInstance().getSoundManager()
-                    .play(PositionedSoundInstance.master(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 1.3f));
+                    .play(PositionedSoundInstance.master(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.3f));
         }
     }
 
