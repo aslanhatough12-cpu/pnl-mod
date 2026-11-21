@@ -37,7 +37,7 @@ public class PnlMod implements ClientModInitializer {
         ClientTickEvents.END_CLIENT_TICK.register(mc -> {
             while (openKey.wasPressed()) {
                 if (mc.player != null) {
-                    mc.player.playSound(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP.value(), 1.0f, 1.3f);
+                    mc.player.playSound(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.3f);
                 }
                 if (mc.currentScreen == null && mc.player != null) {
                     mc.setScreen(new PnlScreen());
