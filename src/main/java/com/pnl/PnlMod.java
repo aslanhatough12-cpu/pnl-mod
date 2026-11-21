@@ -10,7 +10,6 @@ import net.fabricmc.fabric.api.client.message.v1.ClientReceiveMessageEvents;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
-            if (mc.player != null) mc.player.playSound(SoundEvents.UI_BUTTON_CLICK.value(), 0.6f, 1.4f);
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.ClickEvent;
