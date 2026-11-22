@@ -36,17 +36,20 @@ public class PnlMod implements ClientModInitializer {
 
         ClientTickEvents.END_CLIENT_TICK.register(mc -> {
             while (openKey.wasPressed()) {
-                if (mc.player != null) {
-                    mc.player.playSound(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.3f);
-                }
+                Sfx.play(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.3f);
                 if (mc.currentScreen == null && mc.player != null) {
                     mc.setScreen(new PnlScreen());
                 }
             }
+            Sfx.tick();
+            Clock.tick(mc);
             Auction.tick(mc);
         });
 
         ClientReceiveMessageEvents.MODIFY_GAME.register(PnlMod::onMessage);
+        // signed player chat arrives here instead of as a game message
+        ClientReceiveMessageEvents.CHAT.register((message, signedMessage, sender, params, receptionTimestamp) ->
+                ChatAlerts.handle(message.getString()));
         HudRenderCallback.EVENT.register(Hud::render);
 
         ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) ->
@@ -67,6 +70,7 @@ public class PnlMod implements ClientModInitializer {
 
     private static Text onMessage(Text message, boolean overlay) {
         if (overlay) return message;
+        ChatAlerts.handle(message.getString());
         Matcher m = PAID_ME.matcher(message.getString().trim());
         if (!m.matches()) return message;
 
@@ -110,7 +114,7 @@ public class PnlMod implements ClientModInitializer {
             mc.send(() -> mc.setScreen(new ConfirmPayScreen(p, null)));
         } else {
             st.resolveLoss(p);
-            if (mc.player != null) mc.player.playSound(SoundEvents.UI_BUTTON_CLICK.value(), 1.0f, 1.4f);
+            Sfx.play(SoundEvents.UI_BUTTON_CLICK, 1.0f, 1.4f);
             Hud.toast("L  " + p.player + " lost " + Money.pretty(p.amount), 0xEF4444, false);
         }
     }

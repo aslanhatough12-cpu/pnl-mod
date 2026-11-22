@@ -55,6 +55,11 @@ public final class Money {
         return Long.toString(v);
     }
 
+    /** +$52.14M or -$33.7M */
+    public static String signed(long v) {
+        return (v >= 0 ? "+" : "-") + "$" + pretty(Math.abs(v));
+    }
+
     private static String trim(long a, int pow) {
         return new BigDecimal(a).movePointLeft(pow).stripTrailingZeros().toPlainString();
     }
